@@ -2,6 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         pagina: 1,
+        id: '',
         nome: '',
         email: '',
         senha: '',
