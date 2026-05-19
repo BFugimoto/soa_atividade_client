@@ -111,6 +111,32 @@ body{
     margin-bottom: 1rem;
 }
 
+.erro {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--vermelhom);
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+#signInBtn {
+    background: var(--azulDesq);
+    color: var(--brancoBase);
+    border-radius: 20px;
+    border: 0 !important;
+    outline: 0 !important;
+    padding: 0.75rem 1rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", "Geneva", Verdana, sans-serif;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+#signInBtn:disabled {
+    background: var(--cinzaBasee);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
 .modalInput {
     border-radius: 20px;
     border: 1px solid var(--cinzaBasec);

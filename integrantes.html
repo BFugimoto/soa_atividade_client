@@ -1,42 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/scripts/vue.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <title>Integrantes</title>
-    <script>
-        function configurarModalLogin() {
-            const perfilBtn = document.querySelector(".perfilIcone");
-            const modal = document.getElementById("login-modal");
-            const fecharModal = document.getElementById("fechar-login-modal");
-
-            if (!perfilBtn || !modal || !fecharModal) {
-                return;
-            }
-
-            perfilBtn.addEventListener("click", (event) => {
-                modal.classList.add("ativo");
-                modal.setAttribute("aria-hidden", "false");
-            });
-            fecharModal.addEventListener("click", () => {
-                modal.classList.remove("ativo");
-                modal.setAttribute("aria-hidden", "true");
-            });
-
-
-        }
-
-        window.onload = () => {
-            configurarModalLogin();
-        };
-
-    </script>
 </head>
 
 <body>
-
 
     <header>
 
@@ -55,10 +27,6 @@
             <div>
                 <a href="integrantes.html">Integrantes</a>
             </div>
-
-            <!-- <div>
-                <a href="login.html">Login</a>
-            </div> -->
 
         </nav>
 
@@ -96,6 +64,6 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="/scripts/header.js"></script>
 </body>
-
 </html>

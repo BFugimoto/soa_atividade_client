@@ -1,65 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        let endpoint = "https://jsonplaceholder.typicode.com/users";
-
-        async function carregarDados() {
-            const response = await fetch(endpoint, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            const data = await response.json();
-
-            const container = document.getElementById("dados-container");
-            data.forEach(user => {
-                const userDiv = document.createElement("div");
-                userDiv.innerHTML = `
-                    <p>Nome: ${user.name}</p>
-                    <p>Apelido: ${user.username}</p>
-                    <p>Email: ${user.email}</p>
-                    <div class="btn-container">
-                        <a class="btn-editar" href="editarPerfil.html">Editar</a>
-                        <button class="btn-excluir">Excluir</button>
-                    </div>
-                `;
-                container.appendChild(userDiv);
-            });
-        }
-
-
-
-        function configurarModalLogin() {
-            const perfilBtn = document.querySelector(".perfilIcone");
-            const modal = document.getElementById("login-modal");
-            const fecharModal = document.getElementById("fechar-login-modal");
-
-            if (!perfilBtn || !modal || !fecharModal) {
-                return;
-            }
-
-            perfilBtn.addEventListener("click", (event) => {
-                modal.classList.add("ativo");
-                modal.setAttribute("aria-hidden", "false");
-            });
-            fecharModal.addEventListener("click", () => {
-                modal.classList.remove("ativo");
-                modal.setAttribute("aria-hidden", "true");
-            });
-
-
-        }
-
-        window.onload = () => {
-            carregarDados();
-            configurarModalLogin();
-        };
-    </script>
+    <script type="text/javascript" src="/scripts/vue.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <title>Início</title>
 </head>
@@ -84,10 +28,6 @@
                 <a href="integrantes.html">Integrantes</a>
             </div>
 
-            <!-- <div>
-                <a href="login.html">Login</a>
-            </div> -->
-
         </nav>
 
         <div id="pesquisar">
@@ -105,10 +45,47 @@
 
     </header>
 
-    <main class="mainIndex">
+    <main id="app" class="mainIndex mainEdit">
 
-        <h1>Usuários:</h1>
-        <div id="dados-container"></div>
+        <div v-if="pagina == 1">
+            <h1>Usuários:</h1>
+            <div class="dados-container">
+                <div v-for="(usuario, posicao) in listaUsuarios" :key="usuario.id" class="usuario-card">
+                    <p>Nome: {{ usuario.nome }}</p>
+                    <p>Email: {{ usuario.email }}</p>
+                    <div class="btn-container">
+                        <a class="btn-editar" href="#" @click="alterar(posicao)">Editar</a>
+                        <a class="btn-excluir" href="#">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="pagina == 2" class="mainEdit">
+            <button class="btn-voltar" @click="pagina = 1">Voltar</button>
+            <h1>Editar Perfil:</h1>
+
+            <form class="formEdit" action="#" method="POST" @submit.prevent="salvar()">
+
+                <label for="id">Id:</label>
+                <input class="modalInput" type="text" name="id" placeholder="Id" v-model="id" disabled>
+
+                <label for="nome">Nome:</label>
+                <input class="modalInput" type="text" name="nome" placeholder="Nome" v-model="nome" required>
+
+                <label for="email">Email:</label>
+                <input class="modalInput" type="email" name="email" placeholder="Email" v-model="email" required>
+
+                <label for="password">Senha:</label>
+                <input class="modalInput" type="password" name="password" placeholder="Senha" v-model="senha" required>
+
+                <label for="confirmPassword">Confirmar Senha:</label>
+                <input class="modalInput" type="password" name="confirmPassword" placeholder="Confirmar Senha" v-model="senha" required>
+
+                <button id="signInBtn" class="form-btn">Salvar</button>
+
+            </form>
+        </div>
 
     </main>
 
@@ -120,6 +97,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="/scripts/header.js"></script>
+    <script type="text/javascript" src="/scripts/user.js"></script>
 </body>
-
 </html>

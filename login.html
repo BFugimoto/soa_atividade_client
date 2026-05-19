@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/scripts/vue.js"></script>
     <link rel="stylesheet" href="/css/login.css">
     <title>Login</title>
 </head>
+
 <body>
 
-    <main class="mainlogin">
+    <main id="app" class="mainlogin">
 
         <img src="/img/banner1.jpg" alt="banner" class="bannerLogin">
 
@@ -19,12 +21,12 @@
 
                 <img class="logo" src="/img/Group 776.svg" alt="Logo">
                 <h2 class="title">Entrar</h2>
-                <form action="#" id="loginForm" class="formLogin">
+                <form action="#" class="formLogin">
 
                     <input name="email" id="logInEmail" type="email" placeholder="Email" class="modalInput" required>
                     <input name="password" id="logInPassword" type="password" placeholder="Senha" class="modalInput" required>
 
-                    <button class="form-btn" id="logInBtn" type="submit"><a href="index.html">Entrar</a></button>
+                    <button class="form-btn" id="logInBtn" type="submit">Entrar</button>
 
                 </form>
 
@@ -45,14 +47,16 @@
                 <h2 class="title">Cadastrar</h2>
                 <span class="fechar" title="Fechar" onclick="document.getElementById('sign-up-modal').style.display = 'none'">&times;</span>
 
-                <form action="#" class="sign-up-form">
+                <form id="sign-up-form" action="#" method="POST" class="sign-up-form" @submit.prevent="cadastrar()">
 
-                    <input name="nome" type="text" placeholder="Nome" id="cadastroNome" class="modalInput" required>
-                    <input name="email" type="email" placeholder="Email" id="cadastroEmail" class="modalInput" required>
-                    <input name="password" type="password" placeholder="Senha" id="cadastroSenha" class="modalInput" required>
-                    <input name="confirmPassword" type="password" placeholder="Confirmar senha" id="confirmPassword" class="modalInput" required>
+                    <input name="nome" type="text" placeholder="Nome" id="cadastroNome" class="modalInput" v-model="nome" required>
+                    <input name="email" type="email" placeholder="Email" id="cadastroEmail" class="modalInput" v-model="email" required>
+                    <input name="password" type="password" placeholder="Senha" id="senha" class="modalInput" v-model="senha" required>
+                    <input name="confirmPassword" type="password" placeholder="Confirmar senha" id="confirmSenha" class="modalInput" required>
 
-                    <button class="form-btn" id="signInBtn" type="submit"><a href="index.html">Cadastrar</a></button>
+                    <p id="senha-erro" class="erro"></p>
+
+                    <button class="form-btn" id="signInBtn" type="submit" disabled>Cadastrar</button>
 
                 </form>
 
@@ -62,5 +66,6 @@
 
     </main>
 
+    <script type="text/javascript" src="/scripts/user.js"></script>
 </body>
 </html>
