@@ -57,11 +57,14 @@ let app = new Vue({
             this.senha = usuario.senha;
             this.pagina = 2;
         },
-        // Limpar campos do formulário
-        limpar: function() {
-            this.nome = '';
-            this.email = '';
-            this.senha = '';
+        // Exclusão de usuários
+        excluir: async function(posicao) {
+            if(confirm("Tem certeza que deseja excluir este usuário?")) {
+                this.resposta = await fetch(`${this.endpoint}/${posicao}`, {
+                    method: "DELETE"
+                }).then(res => alert(res)).catch(erro => alert(erro));
+                this.listar();
+            }
         }
     },
     created() {
