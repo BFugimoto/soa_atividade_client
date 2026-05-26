@@ -10,84 +10,95 @@
 
 <body>
 
-    <header>
+    <div id="app">
+        <header>
 
-        <div class="logoSite">
-            <a href="index.html">
-                <img src="/img/Logo.svg" alt="Logo">
-            </a>
-        </div>
-
-        <nav>
-
-            <div>
-                <a href="index.html">Início</a>
+            <div class="logoSite">
+                <a href="index.html">
+                    <img src="/img/Logo.svg" alt="Logo">
+                </a>
             </div>
 
-            <div>
-                <a href="integrantes.html">Integrantes</a>
+            <nav>
+
+                <div>
+                    <a href="#" @click="pagina = 1">Início</a>
+                </div>
+
+                <div>
+                    <a href="#" @click="pagina = 3">Integrantes</a>
+                </div>
+
+            </nav>
+
+            <div id="pesquisar">
+                <form class="formSearch" action="#">
+                    <input type="search" name="tipo" placeholder="Pesquisar Usuário">
+                    <button><img src="/img/search2.svg" alt="Lupa"></button>
+                </form>
             </div>
 
-        </nav>
+            <button class="perfilIcone" aria-label="Perfil" type="button">
+                <img src="/img/user2.svg" alt="Usuário">
+            </button>
 
-        <div id="pesquisar">
+        </header>
 
-            <form class="formSearch" action="#">
-                <input type="search" name="tipo" placeholder="Pesquisar Usuário">
-                <button><img src="/img/search2.svg" alt="Lupa"></button>
-            </form>
+        <main class="mainIndex mainEdit">
 
-        </div>
-
-        <button class="perfilIcone" aria-label="Perfil" type="button">
-            <img src="/img/user2.svg" alt="Usuário">
-        </button>
-
-    </header>
-
-    <main id="app" class="mainIndex mainEdit">
-
-        <div v-if="pagina == 1">
-            <h1>Usuários:</h1>
-            <div class="dados-container">
-                <div v-for="(usuario, posicao) in listaUsuarios" :key="usuario.id" class="usuario-card">
-                    <p>Nome: {{ usuario.nome }}</p>
-                    <p>Email: {{ usuario.email }}</p>
-                    <div class="btn-container">
-                        <a class="btn-editar" href="#" @click="alterar(posicao)">Editar</a>
-                        <a class="btn-excluir" href="#" @click="excluir(usuario.id)">Excluir</a>
+            <div v-if="pagina == 1">
+                <h1>Usuários:</h1>
+                <div class="dados-container">
+                    <div v-for="(usuario, posicao) in listaUsuarios" :key="usuario.id" class="usuario-card">
+                        <p>Nome: {{ usuario.nome }}</p>
+                        <p>Email: {{ usuario.email }}</p>
+                        <div class="btn-container">
+                            <a class="btn-editar" href="#" @click="alterar(posicao)">Editar</a>
+                            <a class="btn-excluir" href="#" @click="excluir(usuario.id)">Excluir</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div v-if="pagina == 2" class="mainEdit">
-            <button class="btn-voltar" @click="pagina = 1">Voltar</button>
-            <h1>Editar Perfil:</h1>
+            <div v-if="pagina == 2" class="mainEdit">
+                <button class="btn-voltar" @click="pagina = 1">Voltar</button>
+                <h1>Editar Perfil:</h1>
 
-            <form class="formEdit" action="#" method="POST" @submit.prevent="salvar()">
+                <form class="formEdit" action="#" method="POST" @submit.prevent="salvar()">
 
-                <label for="id">Id:</label>
-                <input class="modalInput" type="text" name="id" placeholder="Id" v-model="id" disabled>
+                    <label for="id">Id:</label>
+                    <input class="modalInput" type="text" name="id" placeholder="Id" v-model="id" disabled>
 
-                <label for="nome">Nome:</label>
-                <input class="modalInput" type="text" name="nome" placeholder="Nome" v-model="nome" required>
+                    <label for="nome">Nome:</label>
+                    <input class="modalInput" type="text" name="nome" placeholder="Nome" v-model="nome" required>
 
-                <label for="email">Email:</label>
-                <input class="modalInput" type="email" name="email" placeholder="Email" v-model="email" required>
+                    <label for="email">Email:</label>
+                    <input class="modalInput" type="email" name="email" placeholder="Email" v-model="email" required>
 
-                <label for="password">Senha:</label>
-                <input class="modalInput" type="password" name="password" placeholder="Senha" v-model="senha" required>
+                    <label for="password">Senha:</label>
+                    <input class="modalInput" type="password" name="password" placeholder="Senha" v-model="senha" required>
 
-                <label for="confirmPassword">Confirmar Senha:</label>
-                <input class="modalInput" type="password" name="confirmPassword" placeholder="Confirmar Senha" v-model="senha" required>
+                    <label for="confirmPassword">Confirmar Senha:</label>
+                    <input class="modalInput" type="password" name="confirmPassword" placeholder="Confirmar Senha" v-model="senha" required>
 
-                <button id="signInBtn" class="form-btn">Salvar</button>
+                    <button id="signInBtn" class="form-btn">Salvar</button>
 
-            </form>
-        </div>
+                </form>
+            </div>
 
-    </main>
+            <div v-if="pagina == 3" class="mainIntegrantes">
+                <h1>Integrantes:</h1>
+                <ul>
+                    <li>Bruno Ken Fugimoto</li>
+                    <li>Cauã Eduardo do Nascimento</li>
+                    <li>João Felipe Vicente</li>
+                    <li>Miguel Galhardo Lima</li>
+                    <li>Otávio Domigues da Silva</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
 
     <div id="login-modal" class="login-modal-overlay" aria-hidden="true">
         <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-texto">
