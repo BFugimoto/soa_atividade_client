@@ -1,28 +1,24 @@
-// Conferir se as senhas coincidem
-function conferirSenhas() {
+function validarSenha() {
     const senha = document.getElementById('senha');
-    const confirmSenha = document.getElementById('confirmSenha');
     const signInBtn = document.getElementById('signInBtn');
     const erroMsg = document.getElementById('senha-erro');
 
-    if (senha.value === confirmSenha.value) {
+    if (senha.value.trim().length > 0) {
         signInBtn.disabled = false;
         erroMsg.textContent = '';
     } else {
         signInBtn.disabled = true;
-        erroMsg.textContent = 'As senhas não coincidem.';
+        erroMsg.textContent = 'Preencha a senha.';
     }
 }
 
-document.getElementById('senha').addEventListener('input', conferirSenhas);
-document.getElementById('confirmSenha').addEventListener('input', conferirSenhas);
+document.getElementById('senha').addEventListener('input', validarSenha);
 
 // Ao fechar o modal, limpar todos os campos do input
 function limparCampos() {
     document.getElementById('cadastroNome').value = '';
     document.getElementById('cadastroEmail').value = '';
     document.getElementById('senha').value = '';
-    document.getElementById('confirmSenha').value = '';
     document.getElementById('signInBtn').disabled = true;
     document.getElementById('senha-erro').textContent = '';
 }

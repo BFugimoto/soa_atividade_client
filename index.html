@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/scripts/vue.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="favicon" href="/img/Logo.svg" type="image/svg">
     <title>Início</title>
 </head>
 
@@ -49,6 +51,12 @@
             <div v-if="pagina == 1">
                 <h1>Usuários:</h1>
                 <div class="dados-container">
+                    <div class="usuario-card">
+                        <p>Cadastrar novo usuário</p>
+                        <div class="btn-container">
+                            <a class="btn-editar" href="#" @click="novoUsuario()">Cadastrar</a>
+                        </div>
+                    </div>
                     <div v-for="(usuario, posicao) in listaUsuarios" :key="usuario.id" class="usuario-card">
                         <p>Nome: {{ usuario.nome }}</p>
                         <p>Email: {{ usuario.email }}</p>
@@ -62,7 +70,7 @@
 
             <div v-if="pagina == 2" class="mainEdit">
                 <button class="btn-voltar" @click="pagina = 1">Voltar</button>
-                <h1>Editar Perfil:</h1>
+                <h1>{{ id ? 'Editar Perfil:' : 'Cadastrar Perfil:' }}</h1>
 
                 <form class="formEdit" action="#" method="POST" @submit.prevent="salvar()">
 
@@ -76,12 +84,10 @@
                     <input class="modalInput" type="email" name="email" placeholder="Email" v-model="email" required>
 
                     <label for="password">Senha:</label>
-                    <input class="modalInput" type="password" name="password" placeholder="Senha" v-model="senha" required>
+                    <input class="modalInput" type="password" name="password" placeholder="Senha" v-model="senha"
+                        required>
 
-                    <label for="confirmPassword">Confirmar Senha:</label>
-                    <input class="modalInput" type="password" name="confirmPassword" placeholder="Confirmar Senha" v-model="senha" required>
-
-                    <button id="signInBtn" class="form-btn">Salvar</button>
+                    <button id="signInBtn" class="form-btn">{{ id ? 'Salvar' : 'Cadastrar' }}</button>
 
                 </form>
             </div>
@@ -111,4 +117,5 @@
     <script type="text/javascript" src="/scripts/header.js"></script>
     <script type="text/javascript" src="/scripts/user.js"></script>
 </body>
+
 </html>

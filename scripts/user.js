@@ -27,12 +27,18 @@ let app = new Vue({
                     email: this.email,
                     senha: this.senha
                 })
-            }).then(res => res.json()).then(data => {
-                window.location.href = 'index.html';
-            }).catch(erro => alert(erro));
+            }).then(res => res.json()).catch(erro => alert(erro));
         },
-        // Edição de usuários
+        // Cadastro ou edição de usuários
         salvar: async function() {
+            if (!this.id) {
+                await this.cadastrar();
+                this.limparFormulario();
+                this.pagina = 1;
+                this.listar();
+                return;
+            }
+
             this.resposta = await fetch(this.endpoint, {
                 method: 'PUT',
                 headers: {
@@ -48,6 +54,16 @@ let app = new Vue({
             this.pagina = 1;
             this.listar();
         },
+        limparFormulario: function() {
+            this.id = '';
+            this.nome = '';
+            this.email = '';
+            this.senha = '';
+        },
+        novoUsuario: function() {
+            this.limparFormulario();
+            this.pagina = 2;
+        },
         // Seleção de usuário para edição
         alterar: function(posicao) {
             const usuario = this.listaUsuarios[posicao];
@@ -62,7 +78,13 @@ let app = new Vue({
             if(confirm("Tem certeza que deseja excluir este usuário?")) {
                 this.resposta = await fetch(`${this.endpoint}/${posicao}`, {
                     method: "DELETE"
-                }).then(res => alert(res)).catch(erro => alert(erro));
+                }).then(res => {
+                    if (!res.ok) {
+                        throw new Error('Erro ao excluir usuário.');
+                    }
+                    alert('Usuário excluído com sucesso!');
+                    return res;
+                }).catch(erro => alert(erro.message || erro));
                 this.listar();
             }
         }
